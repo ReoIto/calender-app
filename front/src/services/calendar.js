@@ -1,7 +1,9 @@
 // このファイルは、コンポーネントのロジック部分をCalendarBoard/index.jsxから切り分ける目的で作成した
 // ロジック = カレンダーを作成する部分
-
 import dayjs from "dayjs";
+
+
+
 // exportが必要になったことに注意する
 // これがないと別のファイルからこのコンポーネントを呼び出すことができない
 export const createCalendar = () => {
@@ -21,7 +23,21 @@ export const createCalendar = () => {
     // 
     const diffFromFirstDay = i - firstDayIndex;
     const day = firstDay.add(diffFromFirstDay, "day");
-
     return day;
   });
 };
+
+// コンポーネント内でこれらを記述していたからこのファイルに切り離す
+// 当日のスタイルを付けるため、当日がどうかを判定
+// 文字列に変換した上で全く同じ文字列になっているか(=同じ日か)という判定をしている
+export const isSameDay = (day, today) => {
+  const format = "YYYYMMDD";
+  return day.format(format) === today.format(format);
+};
+// 今月を取得
+export const isSameMonth = (m1, m2) => {
+  const format = "YYYYMM";
+  return m1.format(format) === m2.format(format);
+};
+// 各月の1日(ついたち)を取得
+export const isFirstDay = day => day.date() === 1;

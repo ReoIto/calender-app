@@ -22,7 +22,7 @@ const CalendarBoard = () => {
               // 中央揃えの色はグレー(textSecondary)で見た目が<caption>で実態が<div>のコンポーネント
               className={styles.days}
               color="textSecondary"
-              align="right"
+              align="center"
               variant="caption"
               component="div"
             >
