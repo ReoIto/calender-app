@@ -6,7 +6,7 @@ export const ADD_SCHEDULE_CLOSE_DIALOG = "ADD_SCHEDULE_CLOSE_DIALOG";
 // actions
 export const addScheduleSetValue = payload => ({ // formの値を更新するacion
   type: ADD_SCHEDULE_SET_VALUE,
-  payload
+  payload // payloadには {[key]: value} のオブジェクトを受け取る
 });
 
 export const addScheduleOpenDialog = () => ({ // dialogを開けるaction

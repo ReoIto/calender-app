@@ -5,7 +5,7 @@ import {
 } from "./actions";
 
 // 初期値 主にformのデータとdialogが開いているかどうかの２つの状態が必要だから
-const init = {　// いつ,どこで,誰が の情報
+const init = { // いつ,どこで,誰が の情報
   form: {
     title: "",
     description: "",
