@@ -6,10 +6,18 @@ import {
   DialogActions,
   Button,
   Input,
-  Grid
+  Grid,
+  IconButton
 } from "@material-ui/core";
-import { LocationOnOutlined, NotesOutlined } from "@material-ui/icons";
+import { 
+  LocationOnOutlined, 
+  NotesOutlined,
+  AccessTime,
+  Close
+} from "@material-ui/icons";
+import { DatePicker } from "@material-ui/pickers";
 import { withStyles } from "@material-ui/styles";
+import * as styles from "./style.css";
 
 const spacer = { margin: "4px 0" };
 const Title = withStyles({
@@ -28,7 +36,7 @@ const Title = withStyles({
 
 const AddScheduleDialog = ({
   schedule: {
-    form: { title, location, description },
+    form: { title, location, description, date },
     isDialogOpen
   },
   closeDialog,
@@ -36,6 +44,13 @@ const AddScheduleDialog = ({
 }) => {
   return (
     <Dialog open={isDialogOpen} onClose={closeDialog} maxWidth="xs" fullWidth>
+      <DialogActions>
+        <div className={styles.closeButton}>
+          <IconButton onClick={closeDialog} size="small">
+            <Close />
+          </IconButton>
+        </div>
+      </DialogActions>
       <DialogContent>
         <Title
           autoFocus
@@ -46,15 +61,18 @@ const AddScheduleDialog = ({
         />
         <Grid container spacing={1} alignItems="center" justify="space-between">
           <Grid item>
-            <LocationOnOutlined />
+            <AccessTime />
           </Grid>
           <Grid item xs={10}>
-            <TextField
-              style={spacer}
+            <DatePicker
+              value={date}
+              onChange={d => setSchedule({ date: d })} // <DatePicker>のonChangeのコールバックは state として持ちたいDayjsオブジェクトをそのまま引数に渡してくれるから、{ date: d }としてsetScheduleに渡せばok
+              variant="inline"
+              format="YYYY年M月D日"
+              animateYearScrolling
+              disableToolbar
               fullWidth
-              placeholder="場所を追加"
-              value={location}
-              onChange={e => setSchedule({ location: e.target.value })}
+              style={spacer}
             />
           </Grid>
         </Grid>
