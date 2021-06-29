@@ -5,7 +5,7 @@ import React from "react";
 import * as styles from "./style.css";
 import { Typography } from "@material-ui/core";
 import dayjs from "dayjs";
-import { isSameMonth, isSameDay, isFirstDay } from "../../services/calendar";
+import { isSameDay, isSameMonth, isFirstDay, getMonth} from "../../services/calendar";
 
 // props.childrenをそのまま表示しているだけ
 //
@@ -38,13 +38,13 @@ import { isSameMonth, isSameDay, isFirstDay } from "../../services/calendar";
 //   );
 // };
 
-const CalendarElement = ({ day }) => {
-  const today = dayjs();
-  // 今月以外のときグレーダウン(textPrimary: 黒, textSecondary: グレー)
-  const isCurrentMonth = isSameMonth(day, today);
+const CalendarElement = ({ day, month }) => {
+  const currentMonth = getMonth(month);
+  const isCurrentMonth = isSameMonth(day, currentMonth);
   const textColor = isCurrentMonth ? "textPrimary" : "textSecondary";
-  const format = isFirstDay(day) ? "M月D日" : "D";
+  const today = dayjs();
   const isToday = isSameDay(day, today);
+  const format = isFirstDay(day) ? "M月D日" : "D";
 
   return (
     <div className={styles.element}>

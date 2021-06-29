@@ -1,14 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import CalendarBoard from "./components/CalendarBoard";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import CalendarBoard from "./components/calendarBoard/container";
 import dayjs from "dayjs";
 import "dayjs/locale/ja";
 dayjs.locale("ja");
+import rootReducer from "./redux/rootReducer";
+import Navigation from "./components/Navigation/container";
+
+const store = createStore(rootReducer);
 
 const App = () => (
-  <div>
+  <Provider store={store}>
+    <Navigation />
     <CalendarBoard />
-  </div>
+  </Provider>
 );
 
 ReactDOM.render(<App />, document.getElementById("root"));
